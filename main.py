@@ -37,7 +37,6 @@ def requires_auth(f):
 @app.route("/")
 @requires_auth
 def index():
-    # return "Hello {u}".format(u=flask.session['username'])
     return """
 <html>
   <head>
@@ -46,51 +45,6 @@ def index():
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <script>
-      Vue.component('navbar', {
-        template: '<div>header</div>'
-      });
-      Vue.component('send-tweet', {
-        template: `
-          <div>
-            <p><textarea v-model="status.status"></textarea></p>
-            <p><button v-on:click="sendTweet">Tweet</button></p>
-          </div>
-        `,
-        data: function () {
-          return {status: {status: ''}}
-        },
-        methods: {
-          sendTweet: function() {
-            fetch('/api/statuses/update.json', {
-              method: 'POST',
-              credentials: 'same-origin',
-              headers: new Headers({
-                'Content-Type': 'application/json'
-              }),
-              body: JSON.stringify(this.status)
-            })
-            .then(r => r.json())
-            .catch(e => alert(e))
-            .then(r => {
-              if (r.id_str) {
-                localStorage.setItem(r.id_str, JSON.stringify(r));
-                this.status.status = '';
-              } else {
-                alert(r.errors[0].message);
-              }
-            });
-          }
-        },
-      });
-      Vue.component('refresh-toggle', {
-        template: `
-          <div style="position: fixed;bottom: 20px;right: 50px;">
-            <button><i class="fa fa-refresh" aria-hidden="true"></i></button>
-          </div>
-        `
-      });
-    </script>
     <div id="app">
       <navbar></navbar>
       <send-tweet v-if="!displayTweet"></send-tweet>
@@ -101,23 +55,10 @@ def index():
         <i class="fa fa-refresh fa-4x" aria-hidden="true"></i>
       </button>
     </div>
-    <script>
-      var app = new Vue({
-        el: '#app',
-        data: {
-          displayTweet: false,
-          message: 'Hello Vue!'
-        },
-        methods: {
-          toggleDisplayTweet: function() {
-            this.displayTweet = !this.displayTweet;
-            console.log(this.displayTweet);
-          }
-        }
-      });
-    </script>
+    <script src="/static/component.js"></script>
+    <script src="/static/main.js"></script>
   </body>
- </html> 
+</html>
     """
 
 

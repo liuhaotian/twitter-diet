@@ -1,0 +1,8 @@
+APP_SECRET = 'changeme!'
+
+API_KEY = 'changeme!'
+API_SECRET = 'changeme!'
+API_URL_TEMPLATE = 'https://api.twitter.com/1.1/{path}'
+REQUEST_TOKEN_URL = 'https://api.twitter.com/oauth/request_token'
+AUTHORIZE_URL = 'https://api.twitter.com/oauth/authorize'
+ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token'

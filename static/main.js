@@ -14,8 +14,8 @@ Vue.component('navbar', {
 Vue.component('send-tweet', {
   template: `
     <div v-if="state.displayTweet">
-      <p><textarea v-model="status.status"></textarea></p>
-      <p><button v-on:click="sendTweet">Tweet</button></p>
+      <p><textarea style="width: 100%;" rows=5 v-model="status.status"></textarea></p>
+      <p><button style="position: fixed;right: 5vw;" v-on:click="sendTweet">Tweet</button></p>
     </div>
   `,
   data: function () {
@@ -50,8 +50,8 @@ Vue.component('send-tweet', {
 
 Vue.component('tweet-toggle', {
   template: `
-    <div style="position: fixed;bottom: 20px;right: 20px;">
-      <button v-on:click="toggleDisplayTweet"><font size="+4">📝</font></button>
+    <div style="position: fixed;bottom: 5vw;right: 5vw;">
+      <button v-on:click="toggleDisplayTweet">📝</button>
     </div>
   `,
   methods: {
@@ -61,8 +61,8 @@ Vue.component('tweet-toggle', {
 
 Vue.component('refresh-toggle', {
   template: `
-    <div style="position: fixed;bottom: 20px;right: 90px;">
-      <button><font size="+4">🔄</font></button>
+    <div style="position: fixed;bottom: 5vh;right: 20vw;">
+      <button style="font-size: 10vw;">🔄</button>
     </div>
   `
 });
@@ -74,7 +74,6 @@ var app = new Vue({
       <navbar></navbar>
       <send-tweet></send-tweet>
       <tweet-toggle></tweet-toggle>
-      <refresh-toggle></refresh-toggle>
     </div>
   `,
   data: {

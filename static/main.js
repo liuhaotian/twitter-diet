@@ -1,16 +1,28 @@
+var store = {
+  state: {
+    displayTweet: true
+  },
+  toggleDisplayTweetAction () {
+    this.state.displayTweet = !this.state.displayTweet;
+  },
+};
+
 Vue.component('navbar', {
   template: '<div>header</div>'
 });
 
 Vue.component('send-tweet', {
   template: `
-    <div>
+    <div v-if="state.displayTweet">
       <p><textarea v-model="status.status"></textarea></p>
       <p><button v-on:click="sendTweet">Tweet</button></p>
     </div>
   `,
   data: function () {
-    return {status: {status: ''}}
+    return {
+      status: {status: ''},
+      state: store.state,
+    }
   },
   methods: {
     sendTweet: function() {
@@ -36,10 +48,21 @@ Vue.component('send-tweet', {
   },
 });
 
+Vue.component('tweet-toggle', {
+  template: `
+    <div style="position: fixed;bottom: 20px;right: 20px;">
+      <button v-on:click="toggleDisplayTweet"><font size="+4">📝</font></button>
+    </div>
+  `,
+  methods: {
+    toggleDisplayTweet: () => store.toggleDisplayTweetAction(),
+  }
+});
+
 Vue.component('refresh-toggle', {
   template: `
-    <div style="position: fixed;bottom: 20px;right: 50px;">
-      <button><i class="fa fa-refresh" aria-hidden="true"></i></button>
+    <div style="position: fixed;bottom: 20px;right: 90px;">
+      <button><font size="+4">🔄</font></button>
     </div>
   `
 });
@@ -49,13 +72,9 @@ var app = new Vue({
   template: `
     <div>
       <navbar></navbar>
-      <send-tweet v-if="!displayTweet"></send-tweet>
-      <button v-on:click="toggleDisplayTweet" style="position: fixed;bottom: 20px;right: 20px;">
-        <i class="fa fa-twitter fa-4x" aria-hidden="true"></i>
-      </button>
-      <button style="position: fixed;bottom: 20px;right: 90px;">
-        <i class="fa fa-refresh fa-4x" aria-hidden="true"></i>
-      </button>
+      <send-tweet></send-tweet>
+      <tweet-toggle></tweet-toggle>
+      <refresh-toggle></refresh-toggle>
     </div>
   `,
   data: {

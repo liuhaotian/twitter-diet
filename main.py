@@ -45,17 +45,7 @@ def index():
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <div id="app">
-      <navbar></navbar>
-      <send-tweet v-if="!displayTweet"></send-tweet>
-      <button v-on:click="toggleDisplayTweet" style="position: fixed;bottom: 20px;right: 20px;">
-        <i class="fa fa-twitter fa-4x" aria-hidden="true"></i>
-      </button>
-      <button style="position: fixed;bottom: 20px;right: 90px;">
-        <i class="fa fa-refresh fa-4x" aria-hidden="true"></i>
-      </button>
-    </div>
-    <script src="/static/component.js"></script>
+    <div id="app"></div>
     <script src="/static/main.js"></script>
   </body>
 </html>
